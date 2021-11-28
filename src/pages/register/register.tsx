@@ -11,11 +11,12 @@ import Box from "@material-ui/core/Box";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
+import TextFormatIcon from "@material-ui/icons/TextFormat";
+
 import KeyChain from "mdi-material-ui/KeyChain";
-import { Link } from "react-router-dom";
 
 import { withSimpleLayout } from "../../layout";
-import { LoginErrors, LoginForm } from "./interfaces";
+import { RegisterErrors, RegisterForm } from "./interfaces";
 import { Formik } from "formik";
 import useAuth from "../../hooks/useAuth";
 import { useSnackbar } from "notistack";
@@ -63,24 +64,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues: LoginForm = {
-  email: "",
+const initialValues: RegisterForm = {
+  username: "",
   password: "",
+  name: "",
+  address: "",
+  cityId: 1,
 };
 
-export const Login = withSimpleLayout((props: any) => {
+export const Register = withSimpleLayout((props: any) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
-  const { handleLogin, authenticated, handleProfile } = useAuth();
+  const { handleRegister } = useAuth();
   const { history } = props;
   const [sendingCredentials, setSendingCredentials] = useState(false);
 
-  const validateForm = (values: LoginForm) => {
-    const errors: LoginErrors = {};
-    if (!values.email) {
-      errors.email = "validation.emailRequired";
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
-      errors.email = "validation.emailInvalid";
+  const validateForm = (values: RegisterForm) => {
+    const errors: RegisterErrors = {};
+    if (!values.username) {
+      errors.username = "validation.emailRequired";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)
+    ) {
+      errors.username = "validation.emailInvalid";
     }
     if (!values.password) {
       errors.password = "validation.passwordRequired";
@@ -88,30 +94,24 @@ export const Login = withSimpleLayout((props: any) => {
     return errors;
   };
 
-  useEffect(() => {
-    if (authenticated) {
-      handleProfile()
-        .then(() => {})
-        .catch((error) => {
-          setSendingCredentials(false);
-          enqueueSnackbar("Invalid set profile", {
-            variant: "error",
-            anchorOrigin: {
-              vertical: "top",
-              horizontal: "center",
-            },
-          });
-        });
-
-      history.push("/");
-    }
-  }, [authenticated]);
-
-  const submitLogin = (values: LoginForm) => {
+  const submitRegister = (values: RegisterForm) => {
     setSendingCredentials(true);
-    handleLogin(values.email, values.password)
+    handleRegister(
+      values.username,
+      values.password,
+      values.name,
+      values.address,
+      values.cityId
+    )
       .then(() => {
         setSendingCredentials(false);
+        enqueueSnackbar("User created", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "center",
+          },
+        });
         history.push("/");
       })
       .catch(() => {
@@ -130,12 +130,12 @@ export const Login = withSimpleLayout((props: any) => {
     <Container component="main" maxWidth="xs" className={classes.container}>
       <Paper elevation={3} className={classes.paper}>
         <Typography component="h1" variant="h6">
-          The Lucky APP
+          Register
         </Typography>
         <Formik
           initialValues={initialValues}
           validate={validateForm}
-          onSubmit={submitLogin}
+          onSubmit={submitRegister}
         >
           {({ values, handleChange, handleSubmit }) => (
             <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -145,12 +145,12 @@ export const Login = withSimpleLayout((props: any) => {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
-                value={values.email}
+                value={values.username}
                 onChange={handleChange}
                 InputProps={{
                   startAdornment: (
@@ -181,6 +181,69 @@ export const Login = withSimpleLayout((props: any) => {
                   ),
                 }}
               />
+              <TextField
+                disabled={sendingCredentials}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="name"
+                label="Name"
+                name="name"
+                autoComplete="name"
+                autoFocus
+                value={values.name}
+                onChange={handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <TextFormatIcon color="primary" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                disabled={sendingCredentials}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="address"
+                label="Address"
+                name="address"
+                autoComplete="address"
+                autoFocus
+                value={values.address}
+                onChange={handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <TextFormatIcon color="primary" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                disabled={true}
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="city"
+                label="City"
+                name="city"
+                autoComplete="city"
+                autoFocus
+                value="1"
+                onChange={handleChange}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <TextFormatIcon color="primary" />
+                    </InputAdornment>
+                  ),
+                }}
+              />
               <Button
                 type="submit"
                 fullWidth
@@ -192,23 +255,12 @@ export const Login = withSimpleLayout((props: any) => {
                 {sendingCredentials ? (
                   <CircularProgress size={24} className={classes.loading} />
                 ) : (
-                  <>Sign in</>
+                  <>Register</>
                 )}
               </Button>
             </form>
           )}
         </Formik>
-        <Button
-          type="button"
-          component={Link}
-          to="/register"
-          fullWidth
-          variant="contained"
-          color="secondary"
-          className={classes.register}
-        >
-          <>Register</>
-        </Button>
       </Paper>
       <Box mt={4}>
         <Typography variant="body2" color="textSecondary" align="center">

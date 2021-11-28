@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 import AuthContext from "../context/AuthProvider";
-import { doLogin, getProfile } from "../services/authService";
+import { doLogin, getProfile, userRegister } from "../services/authService";
 import { userLogout } from "../actions/user";
 import { useDispatch } from "react-redux";
 import moment from "moment";
@@ -66,6 +66,28 @@ export default function useAuth() {
     });
   }, [setProfile]);
 
+  const handleRegister = useCallback(
+    (
+      username: string,
+      password: string,
+      name: string,
+      address: string,
+      cityId: number
+    ) => {
+      return new Promise((resolve, reject) => {
+        userRegister({ username, password, name, address, cityId })
+          .then((profileResponse: any) => {
+            console.log(profileResponse);
+            resolve(true);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    },
+    []
+  );
+
   const handleLogout = useCallback(() => {
     return new Promise((resolve) => {
       setJWT("");
@@ -129,6 +151,7 @@ export default function useAuth() {
   return {
     handleLogin,
     handleProfile,
+    handleRegister,
     handleLogout,
     checkAccess,
     authenticated: jwt !== "",

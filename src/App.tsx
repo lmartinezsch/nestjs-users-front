@@ -11,6 +11,7 @@ import { RCCThemeProvider } from "./context/RCCThemeProvider";
 import { AuthProvider } from "./context/AuthProvider";
 import { NotFound } from "./pages/notFound";
 import { Login } from "./pages/login";
+import { Register } from "./pages/register";
 import { AboutUs } from "./pages/aboutUs";
 import history from "./services/history";
 import { ProtectedRoute } from "./routes";
@@ -75,6 +76,13 @@ function App() {
                       path="/about-us"
                       render={(props) => (
                         <AboutUs {...props} title="The Lucky App - About us" />
+                      )}
+                    />
+                    <Route
+                      exact
+                      path="/register"
+                      render={(props) => (
+                        <Register {...props} title="The Lucky App - About us" />
                       )}
                     />
                     <Route
