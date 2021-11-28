@@ -35,7 +35,6 @@ class API {
   }
 
   get(url: string, config?: any) {
-    console.log(config);
     return this.client.get(url, config);
   }
 

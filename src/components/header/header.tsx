@@ -4,8 +4,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Brightness2OutlinedIcon from "@material-ui/icons/Brightness2Outlined";
-import BrightnessLowOutlinedIcon from "@material-ui/icons/BrightnessLowOutlined";
 
 import {
   Divider,
@@ -15,7 +13,6 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import { UserMenu } from "./header_user_menu";
-import useAppTheme from "../../hooks/useAppTheme";
 import { ProgressBar } from "../loader";
 import { useRouteMatch, withRouter } from "react-router";
 
@@ -59,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 
 export const Header = withRouter((props: any) => {
   const classes = useStyles();
-  const { darkTheme, setDarkTheme, lightTheme, setLightTheme } = useAppTheme();
 
   const IsSelected = (routePath: string, exact: boolean = true) => {
     return useRouteMatch({

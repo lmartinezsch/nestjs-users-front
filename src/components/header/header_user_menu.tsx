@@ -99,8 +99,7 @@ export const UserMenu = () => {
               <ClickAwayListener onClickAway={handleClose}>
                 <div>
                   <div className={classes.userInfo}>
-                    <p>{userLogged?.user}</p>
-                    <small>{userLogged?.email}</small>
+                    <p>{userLogged?.name}</p>
                   </div>
                   <Divider className={classes.userDivider} />
                   <MenuList

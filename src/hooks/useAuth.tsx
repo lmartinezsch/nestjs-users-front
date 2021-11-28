@@ -56,13 +56,11 @@ export default function useAuth() {
       getProfile()
         .then((profileResponse: any) => {
           const { data } = profileResponse;
-          console.log(data);
           setProfile(JSON.stringify(data));
           localStorage.setItem("profile", JSON.stringify(data));
           resolve(true);
         })
         .catch((error) => {
-          console.log(error);
           reject(error);
         });
     });
@@ -90,16 +88,9 @@ export default function useAuth() {
 
   const getUserFromToken = useCallback(() => {
     const token = profile;
-    if (token) {
-      const claims = getClaims(token);
-      if (claims === null) {
-        return null;
-      }
 
-      return {
-        user: `${claims.name} ${claims.lastname}`,
-        email: claims.email,
-      };
+    if (token) {
+      return JSON.parse(token);
     }
 
     return null;
