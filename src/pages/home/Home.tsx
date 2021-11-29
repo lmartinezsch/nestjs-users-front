@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { withComplexLayout } from "../../layout";
 import { Typography, Divider } from "@material-ui/core";
+import useAuth from "../../hooks/useAuth";
 
 const useStyles = makeStyles(() => ({
   main: {
@@ -20,6 +21,7 @@ const useStyles = makeStyles(() => ({
 
 export const Home = withComplexLayout(() => {
   const classes = useStyles();
+  const { userLogged } = useAuth();
 
   return (
     <div className={classes.main}>
@@ -27,7 +29,7 @@ export const Home = withComplexLayout(() => {
         Dashboard
       </Typography>
       <Divider className={classes.dividerMargin} />
-      Welcome
+      Welcome {userLogged?.name}
     </div>
   );
 });

@@ -15,16 +15,6 @@ interface Claims {
   iat: number;
 }
 
-interface ProfileResponse {
-  id: string;
-  name: string;
-  addres: {
-    street: string;
-    city: string;
-    country: string;
-  };
-}
-
 export default function useAuth() {
   const { jwt, setJWT } = useContext(AuthContext);
   const { profile, setProfile } = useContext(AuthContext);
@@ -32,6 +22,8 @@ export default function useAuth() {
 
   const handleLogin = useCallback(
     (username: string, password: string) => {
+      console.log(username);
+      console.log(password);
       return new Promise((resolve, reject) => {
         doLogin({
           username,
@@ -91,6 +83,7 @@ export default function useAuth() {
   const handleLogout = useCallback(() => {
     return new Promise((resolve) => {
       setJWT("");
+      setProfile("");
       localStorage.clear();
       dispatch(userLogout());
       resolve(true);

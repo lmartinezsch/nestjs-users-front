@@ -24,8 +24,6 @@ class API {
       function (config) {
         const token = localStorage.getItem("jwt");
         if (token) config.headers.Authorization = `Bearer ${token}`;
-        const impersonate = localStorage.getItem("impersonate");
-        if (impersonate) config.headers["X-Impersonate-User"] = impersonate;
         return config;
       },
       function (error) {
