@@ -1,9 +1,9 @@
 import { useCallback, useContext, useEffect } from "react";
-import RCCThemeContext from "../context/RCCThemeProvider";
+import PortalThemeContext from "../context/PortalThemeProvider";
 import eventEmitter from "../utils/event_emitter";
 
 export default function useAppTheme() {
-  const { themeName, setThemeName } = useContext(RCCThemeContext);
+  const { themeName, setThemeName } = useContext(PortalThemeContext);
 
   const isDarkTheme = () => {
     return themeName === "dark";

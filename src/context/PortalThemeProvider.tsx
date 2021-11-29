@@ -2,12 +2,12 @@ import React, { useState, useCallback, useEffect } from "react";
 import { ThemeProvider, CssBaseline, useMediaQuery } from "@material-ui/core";
 import getTheme from "../config/theme";
 
-const RCCThemeContext = React.createContext({
+const PortalThemeContext = React.createContext({
   themeName: "",
   setThemeName: (_themeName: any) => {},
 });
 
-export function RCCThemeProvider({ children }: { [key: string]: any }) {
+export function PortalThemeProvider({ children }: { [key: string]: any }) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [initialized, setInitialized] = useState(false);
 
@@ -30,13 +30,13 @@ export function RCCThemeProvider({ children }: { [key: string]: any }) {
   }, [setThemeName, initialized, setInitialized, prefersDarkMode]);
 
   return initialized ? (
-    <RCCThemeContext.Provider value={{ themeName, setThemeName }}>
+    <PortalThemeContext.Provider value={{ themeName, setThemeName }}>
       <ThemeProvider theme={getTheme(themeName)}>
         <CssBaseline />
         {children}
       </ThemeProvider>
-    </RCCThemeContext.Provider>
+    </PortalThemeContext.Provider>
   ) : null;
 }
 
-export default RCCThemeContext;
+export default PortalThemeContext;

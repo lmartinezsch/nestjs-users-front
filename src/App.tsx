@@ -7,7 +7,7 @@ import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
 import ReportProblemOutlinedIcon from "@material-ui/icons/ReportProblemOutlined";
 import CloseOutlinedIcon from "@material-ui/icons/CloseOutlined";
 import { IconButton } from "@material-ui/core";
-import { RCCThemeProvider } from "./context/RCCThemeProvider";
+import { PortalThemeProvider } from "./context/PortalThemeProvider";
 import { AuthProvider } from "./context/AuthProvider";
 import { NotFound } from "./pages/notFound";
 import { Login } from "./pages/login";
@@ -31,7 +31,7 @@ function App() {
   return (
     <>
       <AuthProvider>
-        <RCCThemeProvider>
+        <PortalThemeProvider>
           <Suspense fallback={<Loading />}>
             <SnackbarProvider
               maxSnack={3}
@@ -116,7 +116,7 @@ function App() {
               </ModalProvider>
             </SnackbarProvider>
           </Suspense>
-        </RCCThemeProvider>
+        </PortalThemeProvider>
       </AuthProvider>
     </>
   );
