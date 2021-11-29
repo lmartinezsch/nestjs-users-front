@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# NestJs API User Authentication
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This repository is a challenge made for The Lucky APP
 
-In the project directory, you can run:
+## Getting started
 
-### `npm start`
+This is the frontend of https://github.com/lmartinezsch/nestjs-users made by React.js.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Prerequisites
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+---
 
-### `npm test`
+Please install node.js and I recommend to use docker for your database.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Install Docker Destop for Linux: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
-### `npm run build`
+- Install Docker Desktop for MAC: [https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Install Docker Desktop for Windows: [https://docs.docker.com/docker-for-windows/install/](https://docs.docker.com/docker-for-windows/install/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Install compose: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![#f03c15]¡¡¡IMPORTANT!!!
 
-### `npm run eject`
+![#f03c15]You will need to run the api first https://github.com/lmartinezsch/nestjs-users
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Clone the repository in your projects folder and run the project with docker
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```bash
+$ git clone git@github.com:lmartinezsch/nestjs-users-front.git
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Running the app
 
-## Learn More
+```bash
+$ cd nestjs-users-front
+$ docker build -t nestjs-users-front:dev .
+$ docker run -it --rm -v ${PWD}:/app -v /app/node_modules -p 4040:4040 -e CHOKIDAR_USEPOLLING=true nestjs-users-front:dev
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Create a new User
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Use http://localhost:4040/register for register a new user
+
+## Login User
+
+Use http://localhost:4040/login for loggin the user
