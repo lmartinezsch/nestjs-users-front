@@ -1,4 +1,4 @@
-# NestJs API User Authentication
+# NestJs Users frontend Authentication
 
 ## Description
 
@@ -22,9 +22,12 @@ Please install node.js and I recommend to use docker for your database.
 
 - Install compose: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/)
 
-![#f03c15]¡¡¡IMPORTANT!!!
+```diff
+- ¡¡¡IMPORTANT!!!
 
-![#f03c15]You will need to run the api first https://github.com/lmartinezsch/nestjs-users
+- You will need to run the api first https://github.com/lmartinezsch/nestjs-users
+
+```
 
 ## Installation
 
