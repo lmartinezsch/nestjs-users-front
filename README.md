@@ -12,8 +12,6 @@ This is the frontend of https://github.com/lmartinezsch/nestjs-users made by Rea
 
 ---
 
-Please install node.js and I recommend to use docker for your database.
-
 - Install Docker Destop for Linux: [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 - Install Docker Desktop for MAC: [https://docs.docker.com/docker-for-mac/install/](https://docs.docker.com/docker-for-mac/install/)
